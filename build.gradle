@@ -32,6 +32,10 @@ dependencies {
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+	// SSL support (for HTTPS)
+	implementation 'io.netty:netty-codec-http:4.1.94.Final'
+	implementation 'io.netty:netty-handler:4.1.94.Final'
 	
 }
 
