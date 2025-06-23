@@ -4,7 +4,7 @@
   <a href="https://opensource.org/licenses/MIT">
     <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="MIT License"/>
   </a>
-    <img src='https://img.shields.io/badge/all_contributors-1-blue.svg?style=flat-square' />
+    <img src='https://img.shields.io/badge/all_contributors-2-blue.svg?style=flat-square' />
   </a>
 </p>
 
