@@ -15,6 +15,13 @@
   </a>
 </p>
 
+<p align="center">
+    <a href="https://github.com/RedRedL/Hermes/labels/bug">Report Bug</a>
+    &middot;
+    <a href="https://github.com/RedRedL/Hermes/labels/enhancement">Request Feature</a>
+  </p>
+</div>
+
 **HermesAPI** is a lightweight HTTP API mod for Fabric Minecraft servers that provides real-time server interaction through a simple HTTP interface.
 
 ## 🚀 Features
@@ -38,6 +45,7 @@
 [Netty-url]: https://netty.io
 [Fabric-shield]: https://img.shields.io/badge/Fabric_API-1.21.1-1976d2?logo=fabric
 [Fabric-url]: https://fabricmc.net
+
 
 ## 📦 Installation
 
