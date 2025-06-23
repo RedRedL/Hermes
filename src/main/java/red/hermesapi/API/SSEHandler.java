@@ -68,8 +68,10 @@ public class SSEHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-        sseConnections.remove(ctx.channel());
-        System.out.println("SSE client disconnected: " + ctx.channel());
+        if (sseConnections.contains(ctx.channel())) {
+            sseConnections.remove(ctx.channel());
+            System.out.println("SSE client disconnected: " + ctx.channel());
+        }
         super.channelInactive(ctx);
     }
 }
