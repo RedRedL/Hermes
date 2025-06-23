@@ -1,4 +1,4 @@
-<h1 align="center">HermesAPI</h1>
+<h1 align="center">Hermes</h1>
 
 <p align="center">
   <a href="https://opensource.org/licenses/MIT">
