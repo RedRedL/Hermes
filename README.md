@@ -22,6 +22,7 @@
 - Server side only
 - Retrieve online player count
 - Get list of online player names
+- Real-time player join/leave events via SSE (Server-Sent Events)
 - Simple HTTP interface using Netty
 - Designed for Minecraft 1.21.1 with Fabric API
 
@@ -51,10 +52,15 @@
 
 The API runs on port `8080` by default:
 
-| Endpoint | Description | Example Response |
-|----------|-------------|------------------|
-| `GET /players/count` | Online player count | `{"count": 5}` |
-| `GET /players/names` | Online player names | `{"players": ["redredl", "Notch"]}` |
+| Endpoint                  | Description                             | Example Response            |
+|---------------------------|-----------------------------------------|-----------------------------|
+| `GET /players/count`      | Online player count                     | `{"count": 5}`              |
+| `GET /players/names`      | Online player names                     | `{"players": ["redredl"]}`  |
+| `GET /players/connections` | SSE stream of join/leave events         | `data: A player has joined!` |
+
+### 🔄 Real-Time Player Events (SSE)
+
+To listen for real-time events like player joins or leaves, connect to the following endpoint:
 
 ```bash
-curl http://localhost:8080/players/count
+curl http://localhost:8080/players/connections
