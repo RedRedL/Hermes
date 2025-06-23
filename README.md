@@ -25,19 +25,21 @@
 - Simple HTTP interface using Netty
 - Designed for Minecraft 1.21.1 with Fabric API
 
-## 🛠️ Built With
+### 🛠️ Built With
 
-<p align="left">
-  <a href="https://www.java.com">
-    <img src="https://img.shields.io/badge/Java-21-orange?logo=java&logoColor=white" alt="Java 21"/>
-  </a>
-  <a href="https://fabricmc.net">
-    <img src="https://img.shields.io/badge/Fabric_API-1.21.1-1976d2?logo=fabric" alt="Fabric API"/>
-  </a>
-  <a href="https://netty.io">
-    <img src="https://img.shields.io/badge/Netty-4.1-red?logo=netty&logoColor=white" alt="Netty"/>
-  </a>
-</p>
+* [![Java][Java-shield]][Java-url]
+* [![Netty][Netty-shield]][Netty-url]
+* [![Fabric][Fabric-shield]][Fabric-url]
+
+<!-- Badge URLs -->
+[Java-shield]: https://img.shields.io/badge/Java-21-orange?logo=openjdk&logoColor=white
+[Java-url]: https://www.java.com
+[Netty-shield]: https://img.shields.io/badge/Netty-4.1-red?logo=netty&logoColor=white
+[Netty-url]: https://netty.io
+[Fabric-shield]: https://img.shields.io/badge/Fabric_API-1.21.1-1976d2?logo=fabric
+[Fabric-url]: https://fabricmc.net
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## 📦 Installation
 
