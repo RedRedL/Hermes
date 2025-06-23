@@ -39,8 +39,6 @@
 [Fabric-shield]: https://img.shields.io/badge/Fabric_API-1.21.1-1976d2?logo=fabric
 [Fabric-url]: https://fabricmc.net
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 ## 📦 Installation
 
 1. Ensure [Fabric Loader](https://fabricmc.net/use/) is installed
