@@ -4,14 +4,7 @@
   <a href="https://opensource.org/licenses/MIT">
     <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="MIT License"/>
   </a>
-  <a href="https://github.com/redredl/HermesAPI/graphs/contributors">
-    <img src="https://img.shields.io/github/contributors/redredl/HermesAPI?color=blue" alt="Contributors"/>
-  </a>
-  <a href="https://github.com/redredl/HermesAPI">
-    <img src="https://img.shields.io/github/repo-size/redredl/HermesAPI?color=yellow" alt="Code Size"/>
-  </a>
-  <a href="https://github.com/redredl/HermesAPI/issues">
-    <img src="https://img.shields.io/github/issues/redredl/HermesAPI?color=red" alt="Issues"/>
+    <img src='https://img.shields.io/badge/all_contributors-1-blue.svg?style=flat-square' />
   </a>
 </p>
 
