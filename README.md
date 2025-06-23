@@ -2,38 +2,58 @@
 
 <p align="center">
   <a href="https://opensource.org/licenses/MIT">
-    <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="MIT License" />
+    <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="MIT License"/>
+  </a>
+  <a href="https://github.com/redredl/HermesAPI/graphs/contributors">
+    <img src="https://img.shields.io/github/contributors/redredl/HermesAPI?color=blue" alt="Contributors"/>
+  </a>
+  <a href="https://github.com/redredl/HermesAPI">
+    <img src="https://img.shields.io/github/repo-size/redredl/HermesAPI?color=yellow" alt="Code Size"/>
+  </a>
+  <a href="https://github.com/redredl/HermesAPI/issues">
+    <img src="https://img.shields.io/github/issues/redredl/HermesAPI?color=red" alt="Issues"/>
   </a>
 </p>
 
+**HermesAPI** is a lightweight HTTP API mod for Fabric Minecraft servers that provides real-time server interaction through a simple HTTP interface.
 
-**HermesAPI** is a lightweight HTTP API mod for Fabric Minecraft servers.
-It provides useful endpoints to interact with the server in real-time.
-
-## Features
+## 🚀 Features
 
 - Server side only
 - Retrieve online player count
 - Get list of online player names
 - Simple HTTP interface using Netty
-- Designed for Minecraft 1.21.1 with Fabric API alone
+- Designed for Minecraft 1.21.1 with Fabric API
 
-## Installation
+## 🛠️ Built With
 
-1. Make sure you have [Fabric Loader](https://fabricmc.net/use/) installed.
-2. Download the latest HermesAPI mod `.jar` file.
-3. Place the `.jar` into your `mods` folder.
-4. Launch your Minecraft server with Fabric.
+<p align="left">
+  <a href="https://www.java.com">
+    <img src="https://img.shields.io/badge/Java-21-orange?logo=java&logoColor=white" alt="Java 21"/>
+  </a>
+  <a href="https://fabricmc.net">
+    <img src="https://img.shields.io/badge/Fabric_API-1.21.1-1976d2?logo=fabric" alt="Fabric API"/>
+  </a>
+  <a href="https://netty.io">
+    <img src="https://img.shields.io/badge/Netty-4.1-red?logo=netty&logoColor=white" alt="Netty"/>
+  </a>
+</p>
 
-## Usage
+## 📦 Installation
 
-Once the server is running, HermesAPI will start an HTTP server on port `8080` by default.  
-You can access these endpoints:
+1. Ensure [Fabric Loader](https://fabricmc.net/use/) is installed
+2. Download the latest release from [Releases]
+3. Place the `.jar` in your `mods` folder
+4. Start your Fabric server
 
-- `/players/count` — Returns the number of online players.
-- `/players/names` — Returns a list of online player names.
+## 💻 Usage
 
-Example request:
+The API runs on port `8080` by default:
+
+| Endpoint | Description | Example Response |
+|----------|-------------|------------------|
+| `GET /players/count` | Online player count | `{"count": 5}` |
+| `GET /players/names` | Online player names | `{"players": ["redredl", "Notch"]}` |
 
 ```bash
 curl http://localhost:8080/players/count
