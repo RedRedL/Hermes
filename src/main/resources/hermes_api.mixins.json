@@ -1,6 +1,6 @@
 {
 	"required": true,
-	"package": "red.webservertools.mixin",
+	"package": "red.hermesapi.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
 		"ExampleMixin"

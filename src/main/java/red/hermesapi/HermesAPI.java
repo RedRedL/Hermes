@@ -1,30 +1,29 @@
-package red.webservertools;
+package red.hermesapi;
 
 import net.fabricmc.api.ModInitializer;
 
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
-import net.minecraft.client.session.report.ReporterEnvironment;
-import net.minecraft.server.MinecraftServer;
-import org.apache.logging.log4j.core.jmx.Server;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import red.webservertools.API.Players.PlayerTracker;
-import red.webservertools.Item.ModItems;
-import red.webservertools.API.APIServer;
+
+import red.hermesapi.API.Players.PlayerTracker;
+
+import red.hermesapi.API.APIServer;
 
 
 
-public class WebServerTools implements ModInitializer {
-	public static final String MOD_ID = "webservertools";
+public class HermesAPI implements ModInitializer {
+	public static final String MOD_ID = "hermes_api";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
 	@Override
 	public void onInitialize() {
 		LOGGER.info("Hello Fabric world!");
-		ModItems.registerModItems();
+
 
 		//Initialise player tracker
 		PlayerTracker.initialize();
+
+
 
 		// Server on port 8080
 		int port = 8080;

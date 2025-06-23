@@ -1,45 +1,51 @@
-package red.webservertools.API.Players;
+package red.hermesapi.API.Players;
 
 
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.server.network.ServerPlayerEntity;
-import red.webservertools.WebServerTools;
+import red.hermesapi.API.APIHandler;
+import red.hermesapi.API.SSEHandler;
+import red.hermesapi.HermesAPI;
 
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 
 public class PlayerTracker {
-    private static final Set<ServerPlayerEntity> onlinePlayers = new CopyOnWriteArraySet<>();
+    private static final ConcurrentHashMap<String, ServerPlayerEntity> onlinePlayers = new ConcurrentHashMap<>();
+
 
     public static void initialize() {
-            WebServerTools.LOGGER.info("Initializing PlayerTracker for " + WebServerTools.MOD_ID);
+            HermesAPI.LOGGER.info("Initializing PlayerTracker for " + HermesAPI.MOD_ID);
             onlinePlayers.clear();
 
             ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
                 ServerPlayerEntity player = handler.player;
-                onlinePlayers.add(player);
+                String UUID = player.getUuidAsString();
+                onlinePlayers.put(UUID, player);
+                SSEHandler.broadcast(player.getName().getString() + " has joined!");
             });
 
             ServerPlayConnectionEvents.DISCONNECT.register((handler, server) -> {
-                ServerPlayerEntity player = handler.player;
-                onlinePlayers.remove(player);
+                String UUID = handler.player.getUuidAsString();
+                onlinePlayers.remove(UUID);
+                SSEHandler.broadcast(handler.player.getName().getString() + " has left.");
             });
         }
 
-    public static Set<ServerPlayerEntity> getOnlinePlayers() {
-        return Collections.unmodifiableSet(onlinePlayers);
-        }
 
     // Helper method to get names
     public static List<String> getOnlinePlayerNames() {
         List<String> names = new ArrayList<>();
-        for (ServerPlayerEntity player : onlinePlayers) {
+        for (ServerPlayerEntity player : onlinePlayers.values()) {
             names.add(player.getName().getString());
         }
+        Collections.sort(names, String.CASE_INSENSITIVE_ORDER);
         return names;
         }
+
 
     public static int getOnlinePlayerCount() {
         return onlinePlayers.size();

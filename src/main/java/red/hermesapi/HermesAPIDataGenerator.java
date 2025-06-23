@@ -1,9 +1,9 @@
-package red.webservertools;
+package red.hermesapi;
 
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 
-public class WebServerToolsDataGenerator implements DataGeneratorEntrypoint {
+public class HermesAPIDataGenerator implements DataGeneratorEntrypoint {
 	@Override
 	public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
 

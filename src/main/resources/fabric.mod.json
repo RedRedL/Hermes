@@ -1,32 +1,32 @@
 {
 	"schemaVersion": 1,
-	"id": "web-server-tools",
+	"id": "hermes_api",
 	"version": "${version}",
-	"name": "Web Server Tools",
-	"description": "An API for Fabric Servers by RedRedL",
+	"name": "HermesAPI",
+	"description": "An HTTP API for Fabric servers by RedRedL",
 	"authors": [
 		"RedRedL"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/RedRedL/Minecraft-Web-Server-Tools-1.21.1"
+		"sources": "https://github.com/RedRedL/Hermes"
 	},
 	"license": "CC0-1.0",
-	"icon": "assets/web-server-tools/icon.png",
+	"icon": "assets/hermes_api/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"red.webservertools.WebServerTools"
+			"red.hermesapi.HermesAPI"
 		],
 		"fabric-datagen": [
-			"red.webservertools.WebServerToolsDataGenerator"
+			"red.hermesapi.HermesAPIDataGenerator"
 		],
 		"client": [
-			"red.webservertools.WebServerToolsClient"
+			"red.hermesapi.HermesAPIClient"
 		]
 	},
 	"mixins": [
-		"web-server-tools.mixins.json"
+		"hermes_api.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.16.14",

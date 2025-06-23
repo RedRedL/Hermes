@@ -1,4 +1,4 @@
-package red.webservertools.API;
+package red.hermesapi.API;
 
 import io.netty.bootstrap.ServerBootstrap;
 
@@ -10,10 +10,8 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.http.HttpObjectAggregator;
-import io.netty.handler.codec.http.HttpResponseEncoder;
 import io.netty.handler.codec.http.HttpServerCodec;
-import net.minecraft.server.MinecraftServer;
-import red.webservertools.WebServerTools;
+import io.netty.handler.stream.ChunkedWriteHandler;
 
 
 /**
@@ -47,6 +45,8 @@ public class APIServer {
                             ch.pipeline()
                             .addLast(new HttpServerCodec())
                             .addLast(new HttpObjectAggregator(1048576)) // Max 1MB HTTP body// Decodes HTTP requests
+                            .addLast(new ChunkedWriteHandler())
+                            .addLast(new SSEHandler())
                             .addLast(new APIHandler()); //create pipeline of data handling with APIHandler last
                         }
                     })
