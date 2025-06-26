@@ -11,7 +11,7 @@ import java.io.FileWriter;
 public class ConfigLoader {
 
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-    private static final File CONFIG_FILE = new File(FabricLoader.getInstance().getConfigDir().toFile(), "hermes-config.json");
+    private static final File CONFIG_FILE = new File(FabricLoader.getInstance().getConfigDir().toFile(), "hermesapi/hermes-config.json");
 
     public static HermesConfig loadConfig() {
         try {
