@@ -33,27 +33,27 @@ public class PlayerTracker {
 
 
     public static void initialize() {
-            HermesAPI.LOGGER.info("Initializing PlayerTracker for " + HermesAPI.MOD_ID);
-            onlinePlayers.clear();
+        HermesAPI.LOGGER.info("Initializing PlayerTracker for " + HermesAPI.MOD_ID);
+        onlinePlayers.clear();
 
-            //Load  player data
-            loadPlayerData();
+        //Load  player data
+        loadPlayerData();
 
 
-            ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
-                ServerPlayerEntity player = handler.player;
-                String UUID = player.getUuidAsString();
-                onlinePlayers.put(UUID, player);
-                SSEHandler.broadcast(player.getName().getString() + " has joined!");
-                savePlayerData();
-            });
+        ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
+            ServerPlayerEntity player = handler.player;
+            String UUID = player.getUuidAsString();
+            onlinePlayers.put(UUID, player);
+            SSEHandler.broadcast(player.getName().getString() + " has joined!");
+            savePlayerData();
+        });
 
-            ServerPlayConnectionEvents.DISCONNECT.register((handler, server) -> {
-                String UUID = handler.player.getUuidAsString();
-                onlinePlayers.remove(UUID);
-                SSEHandler.broadcast(handler.player.getName().getString() + " has left.");
-            });
-        }
+        ServerPlayConnectionEvents.DISCONNECT.register((handler, server) -> {
+            String UUID = handler.player.getUuidAsString();
+            onlinePlayers.remove(UUID);
+            SSEHandler.broadcast(handler.player.getName().getString() + " has left.");
+        });
+    }
 
 
     // Helper method to get names
@@ -64,12 +64,12 @@ public class PlayerTracker {
         }
         Collections.sort(names, String.CASE_INSENSITIVE_ORDER);
         return names;
-        }
+    }
 
 
     public static int getOnlinePlayerCount() {
         return onlinePlayers.size();
-        }
+    }
 
 
     private static void savePlayerData() {

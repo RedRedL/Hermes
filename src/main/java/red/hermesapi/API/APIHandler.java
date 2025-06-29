@@ -38,7 +38,7 @@ public class APIHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
                 handlePlayerNames(ctx);
             }
         } catch (Exception e) {
-            exceptionCaught(ctx, e);
+            e.printStackTrace();
         }
     }
 

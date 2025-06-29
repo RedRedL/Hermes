@@ -11,12 +11,12 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpServerCodec;
+import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
 import io.netty.handler.stream.ChunkedWriteHandler;
+import red.hermesapi.API.WebSocket.ChatConnector;
+import red.hermesapi.API.WebSocket.WebSocketHandler;
 
 
-/**
- * Discards any incoming data.
- */
 public class APIServer {
 
     private int port;
@@ -44,10 +44,14 @@ public class APIServer {
                         public void initChannel(SocketChannel ch) throws Exception {
                             ch.pipeline()
                             .addLast(new HttpServerCodec())
-                            .addLast(new HttpObjectAggregator(1048576)) // Max 1MB HTTP body// Decodes HTTP requests
+                            .addLast(new HttpObjectAggregator(1048576))
+
                             .addLast(new ChunkedWriteHandler())
+
+                            .addLast(new ChatConnector()) // WebSocket upgrade handler
                             .addLast(new SSEHandler())
-                            .addLast(new APIHandler()); //create pipeline of data handling with APIHandler last
+                            .addLast(new APIHandler());
+
                         }
                     })
                     .option(ChannelOption.SO_BACKLOG, 128)

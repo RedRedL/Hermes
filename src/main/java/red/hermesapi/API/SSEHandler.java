@@ -21,13 +21,17 @@ public class SSEHandler extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         if (msg instanceof FullHttpRequest request) {
             if ("/players/connections".equals(request.uri())) {
-                handleSSE(ctx, request);
-                return; //End request
+                try {
+                    handleSSE(ctx, request);
+                } finally {
+                    request.release();
+                }
+                return;
             }
         }
 
         // Not SSE, pass down the pipeline
-        ctx.fireChannelRead(msg);
+        ctx.fireChannelRead(((FullHttpRequest) msg).retain());
     }
 
     private void handleSSE(ChannelHandlerContext ctx, FullHttpRequest request) {
