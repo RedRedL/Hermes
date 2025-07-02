@@ -13,7 +13,8 @@ import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpServerCodec;
 import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
 import io.netty.handler.stream.ChunkedWriteHandler;
-import red.hermesapi.API.WebSocket.ChatConnector;
+import red.hermesapi.API.WebSocket.WebSocketConnectorHandler;
+import red.hermesapi.API.WebSocket.WebSocketConnectorHandler;
 import red.hermesapi.API.WebSocket.WebSocketHandler;
 
 
@@ -45,10 +46,9 @@ public class APIServer {
                             ch.pipeline()
                             .addLast(new HttpServerCodec())
                             .addLast(new HttpObjectAggregator(1048576))
-
                             .addLast(new ChunkedWriteHandler())
 
-                            .addLast(new ChatConnector()) // WebSocket upgrade handler
+                            .addLast("WebSocketConnectorHandler", new WebSocketConnectorHandler())
                             .addLast(new SSEHandler())
                             .addLast(new APIHandler());
 

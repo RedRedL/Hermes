@@ -4,6 +4,7 @@ import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.*;
 import io.netty.util.CharsetUtil;
 import red.hermesapi.API.APIHandler;
@@ -13,30 +14,24 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
-public class SSEHandler extends ChannelInboundHandlerAdapter {
+public class SSEHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 
     private static final Set<Channel> sseConnections = Collections.newSetFromMap(new ConcurrentHashMap<>());
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        if (msg instanceof FullHttpRequest request) {
-            if ("/players/connections".equals(request.uri())) {
-                try {
-                    handleSSE(ctx, request);
-                } finally {
-                    request.release();
-                }
-                return;
-            }
+    protected void channelRead0(ChannelHandlerContext ctx, FullHttpRequest request) throws Exception {
+        String uri = request.uri();
+        if (uri.equals("players/connections")) {
+            handleSSE(ctx, request);
+        } else {
+            ctx.fireChannelRead(request.retain());
         }
-
-        // Not SSE, pass down the pipeline
-        ctx.fireChannelRead(((FullHttpRequest) msg).retain());
     }
+
 
     private void handleSSE(ChannelHandlerContext ctx, FullHttpRequest request) {
 
-        // Establosh connection
+        // Establish connection
         HttpResponse response = new DefaultHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK);
         response.headers().set(HttpHeaderNames.CONTENT_TYPE, "text/event-stream");
         response.headers().set(HttpHeaderNames.CACHE_CONTROL, "no-cache");
@@ -61,6 +56,7 @@ public class SSEHandler extends ChannelInboundHandlerAdapter {
         }, 15, 15, TimeUnit.SECONDS);
     }
 
+
     public static void broadcast(String message) {
         String formatted = message + "\n";
         for (Channel ch : sseConnections) {
@@ -69,6 +65,7 @@ public class SSEHandler extends ChannelInboundHandlerAdapter {
             }
         }
     }
+
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {

@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import red.hermesapi.API.Players.PlayerTracker;
 import red.hermesapi.API.APIServer;
+import red.hermesapi.API.WebSocket.ChatBridge;
 import red.hermesapi.Config.ConfigLoader;
 import red.hermesapi.Config.HermesConfig;
 
@@ -26,6 +27,9 @@ public class HermesAPI implements ModInitializer {
 
 		//Initialise player tracker
 		PlayerTracker.initialize();
+
+		//Initialise Chat tracker
+		ChatBridge.initialize();
 
 
 		// Server on specified port

@@ -1,26 +1,30 @@
 package red.hermesapi.API.WebSocket;
 
-import io.netty.channel.ChannelFutureListener;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.*;
 import io.netty.handler.codec.http.websocketx.WebSocketServerHandshaker;
 import io.netty.handler.codec.http.websocketx.WebSocketServerHandshakerFactory;
-import io.netty.util.ReferenceCountUtil;
-import red.hermesapi.API.Players.PlayerTracker;
-import red.hermesapi.HermesAPI;
+
+import java.util.Collections;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import static io.netty.buffer.Unpooled.copiedBuffer;
-import static io.netty.util.CharsetUtil.UTF_8;
 
-public class ChatConnector extends SimpleChannelInboundHandler<FullHttpRequest> {
+
+// Initialises websocket connections
+public class WebSocketConnectorHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 
     private static WebSocketServerHandshaker handshaker;
+    public static Channel webSocketConnection;
+    public static final Set<Channel> webSocketConnections = Collections.newSetFromMap(new ConcurrentHashMap<>());
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, FullHttpRequest request) {
         String uri = request.uri();
+        System.out.println("HTTP request received: " + request.method() + " " + request.uri());
         if (uri.equals("/chat")) {
             upgradeConnection(ctx, request);
         } else {
@@ -29,8 +33,7 @@ public class ChatConnector extends SimpleChannelInboundHandler<FullHttpRequest> 
     }
 
     private void upgradeConnection(ChannelHandlerContext ctx, FullHttpRequest request) {
-        //HttpHeaders headers = request.headers();
-        ctx.pipeline().replace(this, "ChatConnector", new WebSocketHandler());
+        ctx.pipeline().replace(this, "WebSocketConnectorHandler", new WebSocketHandler());
 
         WebSocketServerHandshakerFactory wsFactory =
                 new WebSocketServerHandshakerFactory(getWebSocketURL(request), null, true);
@@ -40,6 +43,9 @@ public class ChatConnector extends SimpleChannelInboundHandler<FullHttpRequest> 
         } else {
             handshaker.handshake(ctx.channel(), request);
         }
+
+        webSocketConnections.add(ctx.channel());
+        System.out.println("Connection upgraded");
     }
 
 

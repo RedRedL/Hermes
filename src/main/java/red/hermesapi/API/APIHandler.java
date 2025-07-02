@@ -30,7 +30,6 @@ public class APIHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, FullHttpRequest request) {
         String uri = request.uri();
-        HermesAPI.LOGGER.info("A HTTP request has been received");
         try {
             if (uri.equals("/players/count")) {
                 handlePlayerCount(ctx);
@@ -38,7 +37,7 @@ public class APIHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
                 handlePlayerNames(ctx);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            exceptionCaught(ctx, e);
         }
     }
 
